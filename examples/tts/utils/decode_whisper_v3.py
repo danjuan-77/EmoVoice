@@ -10,7 +10,7 @@ def main(parent_dir, audio_subdir):
     output_dir = os.path.join(parent_dir, "pred_whisper_text")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = whisper.load_model("/path/to/your/ckpt/Whisper/large-v3.pt", device=device)
+    model = whisper.load_model("/home/tuwenming/Models/openai/whisper/large_v3.pt", device=device)
     
     with open(gt_text_path, 'r') as file, open(output_dir, 'w') as f:
         for line in tqdm(file):

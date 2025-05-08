@@ -1,18 +1,18 @@
 #!/bin/bash
-export PYTHONPATH=$PYTHONPATH:path/to/your/code/EmoVoice/src
-export CUDA_VISIBLE_DEVICES=1
+export PYTHONPATH=$PYTHONPATH:/home/tuwenming/Projects/EmoVoice ### Need to modify
+export CUDA_VISIBLE_DEVICES=0
 export TOKENIZERS_PARALLELISM=false
 export OMP_NUM_THREADS=1
 export PYDEVD_WARN_SLOW_RESOLVE_TIMEOUT=2
 export CUDA_LAUNCH_BLOCKING=1
 
 code_dir=examples/tts
-llm_path="path/to/your/ckpts/Qwen/Qwen2.5-0.5B"
-codec_decoder_path="path/to/your/ckpts/CosyVoice/CosyVoice-300M-SFT"
-phn_tokenizer="path/to/your/ckpts/Qwen/Qwen2.5-0.5B-phn"
-ckpt_path=/path/to/your/ckpts/EmoVoice-PP
+llm_path="/home/tuwenming/Models/Qwen/Qwen2.5-0.5B" ### Need to modify
+codec_decoder_path="/home/tuwenming/Models/FunAudioLLM/CosyVoice-300M-SFT" ### Need to modify
+phn_tokenizer="/home/tuwenming/Models/Qwen/Qwen2.5-0.5B-phn" ### Need to modify
+ckpt_path=/home/tuwenming/Models/Emovoice ### Need to modify
 split=test
-val_data_path=../test.jsonl
+val_data_path=/home/tuwenming/Projects/EmoVoice/test.jsonl ### Need to modify
 # vocabulary settings
 code_layer=3            # 1 single semantic code layer   2 3 4 5 6 7 8 group semantic code layers 
 total_audio_vocabsize=4160
