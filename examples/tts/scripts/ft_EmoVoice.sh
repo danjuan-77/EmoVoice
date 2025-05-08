@@ -1,5 +1,5 @@
 #!/bin/bash
-export PYTHONPATH=$PYTHONPATH:path/to/your/code/EmoVoice/src
+export PYTHONPATH=$PYTHONPATH:/home/tuwenming/Projects/EmoVoice
 export CUDA_VISIBLE_DEVICES=0,1,2,3
 export TOKENIZERS_PARALLELISM=false
 export OMP_NUM_THREADS=1
@@ -9,7 +9,7 @@ num_gpus_per_node=$(( $(echo ${CUDA_VISIBLE_DEVICES} | tr -cd ',' | wc -c) + 1 )
 num_nodes=1
 num_gpus=$(( num_gpus_per_node * num_nodes ))
 
-llm_path="path/to/your/ckpts/Qwen/Qwen2.5-0.5B"
+llm_path="/share/nlp/tuwenming/models/Qwen/Qwen2.5-0.5B"
 llm_name=Qwen2.5-0.5b
 llm_dim=896                         # 896 1536 3584 8192  -> 0.5B 1.5B 3B 7B
 
@@ -24,8 +24,8 @@ num_latency_tokens=0                # number of latency tokens (in front of the 
 do_layershift=false                 # if false, tokens in each layers use the same codebook, otherwise, use different codebooks
 
 # dataset settings
-train_data_path="../gpt4o_rewritten_and_laiont.jsonl"
-val_data_path="../val.jsonl"
+train_data_path="/share/nlp/tuwenming/projects/UltraVoice_dev/data/emovoice/ultravoice_emotion_angry_5479_emovoice_train.jsonl"
+val_data_path="/share/nlp/tuwenming/projects/UltraVoice_dev/data/emovoice/ultravoice_emotion_angry_5479_emovoice_test.jsonl"
 
 # training settings
 batch_size_training=6
@@ -46,12 +46,12 @@ group_decode_adapter_type=linear
 # log settings
 exp_name="debug1"
 
-wandb_entity_name=yanghaha
-wandb_project_name=SLAM-Omni
+wandb_entity_name=kevin-tutu
+wandb_project_name=test
 
-home_dir=path/to/your/home_dir
+home_dir=/share/nlp/tuwenming/projects/EmoVoice
 output_dir=$home_dir/$exp_name
-ckpt_path=path/to/your/ckpt_path # this line is for resuming training
+ckpt_path=/share/nlp/tuwenming/models/Emovoice/pretrain/emovoice # this line is for resuming training
 
 if [ "$exp_name" = "debug" ]; then
     use_wandb=false
