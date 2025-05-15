@@ -1,5 +1,5 @@
 #!/bin/bash
-export PYTHONPATH=$PYTHONPATH:/home/tuwenming/Projects/EmoVoice
+export PYTHONPATH=$PYTHONPATH:/share/nlp/tuwenming/projects/EmoVoice/src
 export CUDA_VISIBLE_DEVICES=0,1,2,3
 export TOKENIZERS_PARALLELISM=false
 export OMP_NUM_THREADS=1
@@ -24,8 +24,8 @@ num_latency_tokens=0                # number of latency tokens (in front of the 
 do_layershift=false                 # if false, tokens in each layers use the same codebook, otherwise, use different codebooks
 
 # dataset settings
-train_data_path="/share/nlp/tuwenming/projects/UltraVoice_dev/data/emovoice/ultravoice_emotion_angry_5479_emovoice_train.jsonl"
-val_data_path="/share/nlp/tuwenming/projects/UltraVoice_dev/data/emovoice/ultravoice_emotion_angry_5479_emovoice_test.jsonl"
+train_data_path="/share/nlp/tuwenming/projects/UltraVoice_dev/data/emovoice/ultravoice_all_emotions_train.jsonl"
+val_data_path="/share/nlp/tuwenming/projects/UltraVoice_dev/data/emovoice/ultravoice_all_emotions_train.jsonl"
 
 # training settings
 batch_size_training=6
@@ -37,14 +37,14 @@ warmup_steps=1000
 total_steps=100000
 
 # validation settings
-validation_interval=2500
+validation_interval=500
 split_size=0.01
 # model settings
 group_decode=true
 group_decode_adapter_type=linear
 
 # log settings
-exp_name="debug1"
+exp_name="emovoice_sft_ultravoice_emotion_all"
 
 wandb_entity_name=kevin-tutu
 wandb_project_name=test
