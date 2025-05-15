@@ -25,7 +25,7 @@ do_layershift=false                 # if false, tokens in each layers use the sa
 
 # dataset settings
 train_data_path="/share/nlp/tuwenming/projects/UltraVoice_dev/data/emovoice/ultravoice_all_emotions_train.jsonl"
-val_data_path="/share/nlp/tuwenming/projects/UltraVoice_dev/data/emovoice/ultravoice_all_emotions_train.jsonl"
+val_data_path="/share/nlp/tuwenming/projects/UltraVoice_dev/data/emovoice/ultravoice_all_emotions_val.jsonl"
 
 # training settings
 batch_size_training=6
@@ -47,10 +47,11 @@ group_decode_adapter_type=linear
 exp_name="emovoice_sft_ultravoice_emotion_all"
 
 wandb_entity_name=kevin-tutu
-wandb_project_name=test
+# wandb_project_name=test
+wandb_project_name=emovoice-sft
 
 home_dir=/share/nlp/tuwenming/projects/EmoVoice
-output_dir=$home_dir/$exp_name
+output_dir=$home_dir/checkpoints/$exp_name
 ckpt_path=/share/nlp/tuwenming/models/Emovoice/pretrain/emovoice # this line is for resuming training
 
 if [ "$exp_name" = "debug" ]; then
@@ -128,3 +129,5 @@ else
         ++train_config.enable_fsdp=false \
         $hydra_args
 fi
+
+# nohup bash ./examples/tts/scripts/ft_EmoVoice.sh > /share/nlp/tuwenming/projects/UltraVoice_dev/logs/emovoice_sft_ultravoice_emotion_all_$(date +%Y%m%d%H%M%S).log 2>&1 &
