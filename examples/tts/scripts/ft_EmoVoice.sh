@@ -130,4 +130,4 @@ else
         $hydra_args
 fi
 
-# nohup bash ./examples/tts/scripts/ft_EmoVoice.sh > /share/nlp/tuwenming/projects/UltraVoice_dev/logs/emovoice_sft_ultravoice_emotion_all_$(date +%Y%m%d%H%M%S).log 2>&1 &
+/share/nlp/tuwenming/models/Emovoice/pretrain/emovoice# nohup bash ./examples/tts/scripts/ft_EmoVoice.sh > /share/nlp/tuwenming/projects/UltraVoice_dev/logs/emovoice_sft_ultravoice_emotion_all_$(date +%Y%m%d%H%M%S).log 2>&1 &
