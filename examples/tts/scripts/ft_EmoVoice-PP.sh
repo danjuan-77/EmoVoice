@@ -124,7 +124,7 @@ else
     torchrun \
         --nnodes $num_nodes \
         --nproc_per_node $num_gpus_per_node \
-        --master_port=29503 \
+        --master_port=29510 \
         $code_dir/finetune_tts.py \
         ++train_config.enable_ddp=true \
         ++train_config.enable_fsdp=false \
