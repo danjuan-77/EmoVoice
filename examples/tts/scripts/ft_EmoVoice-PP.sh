@@ -1,5 +1,5 @@
 #!/bin/bash
-export PYTHONPATH=$PYTHONPATH:path/to/your/code/EmoVoice/src
+export PYTHONPATH=$PYTHONPATH:/share/nlp/tuwenming/projects/EmoVoice/src
 export CUDA_VISIBLE_DEVICES=0,1,2,3
 export TOKENIZERS_PARALLELISM=false
 export OMP_NUM_THREADS=1
@@ -9,10 +9,10 @@ num_gpus_per_node=$(( $(echo ${CUDA_VISIBLE_DEVICES} | tr -cd ',' | wc -c) + 1 )
 num_nodes=1
 num_gpus=$(( num_gpus_per_node * num_nodes ))
 
-llm_path="path/to/your/ckpts/Qwen/Qwen2.5-0.5B"
+llm_path="/share/nlp/tuwenming/models/Qwen/Qwen2.5-0.5B"
 llm_name=Qwen2.5-0.5b
 llm_dim=896                         # 896 1536 3584 8192  -> 0.5B 1.5B 3B 7B
-phn_tokenizer="path/to/your/ckpts/Qwen/Qwen2.5-0.5B-phn"
+phn_tokenizer="/share/nlp/tuwenming/models/Qwen/Qwen2.5-0.5B-phn"
 
 # vocabulary settings
 code_layer=3                        # 1 single semantic code layer   2 3 4 5 6 7 8 group semantic code layers 
@@ -25,8 +25,8 @@ num_latency_tokens=5                # number of latency tokens (in front of the 
 do_layershift=false                 # if false, tokens in each layers use the same codebook, otherwise, use different codebooks
 
 # dataset settings
-train_data_path="../gpt4o_rewritten_and_laiont_with_phn.jsonl"
-val_data_path="../val_with_phn.jsonl"
+train_data_path="/share/nlp/tuwenming/projects/UltraVoice_dev/data/emovoice/ultravoice_all_emotions_train.jsonl"
+val_data_path="/share/nlp/tuwenming/projects/UltraVoice_dev/data/emovoice/ultravoice_all_emotions_val.jsonl"
 
 # training settings
 batch_size_training=6
@@ -38,21 +38,22 @@ warmup_steps=1000
 total_steps=100000
 
 # validation settings
-validation_interval=2500
+validation_interval=500
 split_size=0.01
 # model settings
 group_decode=true
 group_decode_adapter_type=linear
 
 # log settings
-exp_name="debug2"
+exp_name="emovoice_pp_sft_ultravoice_emotion_all"
 
-wandb_entity_name=yanghaha
-wandb_project_name=SLAM-Omni
+wandb_entity_name=kevin-tutu
+# wandb_project_name=test
+wandb_project_name=emovoice-sft
 
-home_dir=path/to/your/home_dir
-output_dir=$home_dir/$exp_name
-ckpt_path=path/to/your/ckpt_path # this line is for resuming training
+home_dir=/share/nlp/tuwenming/projects/EmoVoice
+output_dir=$home_dir/checkpoints/$exp_name
+ckpt_path=/share/nlp/tuwenming/models/Emovoice/pretrain/emovoice-pp # this line is for resuming training
 
 if [ "$exp_name" = "debug" ]; then
     use_wandb=false
@@ -129,3 +130,5 @@ else
         ++train_config.enable_fsdp=false \
         $hydra_args
 fi
+
+# nohup bash ./examples/tts/scripts/ft_EmoVoice-PP.sh > /share/nlp/tuwenming/projects/UltraVoice_dev/logs/emovoice_pp_sft_ultravoice_emotion_all_$(date +%Y%m%d%H%M%S).log 2>&1 &
