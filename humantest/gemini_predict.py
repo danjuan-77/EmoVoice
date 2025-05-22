@@ -5,7 +5,7 @@ import numpy as np
 from google import genai
 from dotenv import load_dotenv
 # 加载环境变量
-load_dotenv()
+load_dotenv("./key.env")
 
 # 从环境变量中获取 API key
 api_key = os.getenv("GEMINI_API")
