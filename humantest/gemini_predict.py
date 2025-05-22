@@ -35,7 +35,7 @@ Please strictly follow the standards and avoid leniency in your evaluation. Ensu
 
 # 文件路径
 test_set_csv = "./test_set.csv"  # 替换为你的输入 CSV 文件路径
-output_csv = "audio_scores_gemini2.5_flash.csv"  # 替换为输出 CSV 文件路径
+output_csv = "audio_scores_gemini2.5_pro.csv"  # 替换为输出 CSV 文件路径
 
 # 读取测试集 CSV 文件
 df = pd.read_csv(test_set_csv)  # 假设 CSV 包含列：'Filename', 'Description'
@@ -63,8 +63,8 @@ for _, row in tqdm(df.iterrows(), total=len(df)):
 
             # 调用 Gemini API 生成评分
             response = client.models.generate_content(
-                model='gemini-2.5-flash-preview-05-20',
-                # model='gemini-2.5-pro-preview-05-06'
+                # model='gemini-2.5-flash-preview-05-20',
+                model='gemini-2.5-pro-preview-05-06',
                 contents=[
                     prompt,
                     myfile,
