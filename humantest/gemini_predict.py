@@ -11,6 +11,7 @@ load_dotenv()
 api_key = os.getenv("GEMINI_API")
 
 
+
 client = genai.Client(api_key=api_key)
 
 # 模板
