@@ -41,6 +41,7 @@ bash examples/tts/scripts/ft_EmoVoice_1.5B.sh
 
 ## Acknowledgements
 - Our codes is built on [SLAM-LLM](https://github.com/X-LANCE/SLAM-LLM)
+- [CosyVoice](https://github.com/FunAudioLLM/CosyVoice) valuable repo
 
 <!-- ## [Paper](https://arxiv.org/abs/2504.12867); [Demo Page](https://yanghaha0908.github.io/EmoVoice/);  -->
 
